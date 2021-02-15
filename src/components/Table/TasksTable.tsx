@@ -1,7 +1,8 @@
 import React from 'react';
-import {} from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-
+import SortPoper from '../SortPoper';
+import FilterListIcon from '@material-ui/icons/FilterList';
 import { Table as TableElement, ColumnBadged } from './style';
 
 import {
@@ -10,10 +11,6 @@ import {
   Theme,
   createStyles,
 } from '@material-ui/core/styles';
-import SepsisIcon from '../SepsisIcon';
-import SortPoper from '../SortPoper';
-import CovidIcon from '../CovidIcon';
-import Sort from '../Sort';
 
 type PropsBeforeStyle = {
   active: boolean;
@@ -72,12 +69,12 @@ const useStyles = makeStyles(theme => ({
 }));
 interface Props {
   children: React.ReactNode | React.ReactNode[];
-  order: any;
-  orderBy: any;
-  onRequestSort: any;
-  filters: any;
+  order?: any;
+  orderBy?: any;
+  onRequestSort?: any;
+  filters?: any;
 }
-const Table: React.FC<Props> = ({
+const Tasks: React.FC<Props> = ({
   children,
   order,
   orderBy,
@@ -98,14 +95,10 @@ const Table: React.FC<Props> = ({
   const getCurrentOrder = property =>
     orderBy === property && order === 'ASC' ? 'asc' : 'desc';
 
-  const SEPSIS_FLAG = filters.filter?.sepsis?.value || 'white';
-
-  const COVID_FLAG = filters.filter?.covid?.value || 'white';
   return (
     <TableElement>
       <thead>
         <tr>
-          <ColumnBadged center>Location</ColumnBadged>
           <ColumnBadged center>
             <StyledTableSortLabel
               active={orderBy === 'name'}
@@ -120,73 +113,34 @@ const Table: React.FC<Props> = ({
               ) : null}
             </StyledTableSortLabel>
           </ColumnBadged>
+          <ColumnBadged center>Location</ColumnBadged>
+
+          <ColumnBadged center>Due</ColumnBadged>
+          <ColumnBadged center>Task Type</ColumnBadged>
+
+          <ColumnBadged center>Task</ColumnBadged>
+
           <ColumnBadged center>
-            <StyledTableSortLabel
-              active={orderBy === 'denwis'}
-              direction={getCurrentOrder('denwis')}
-              onClick={createSortHandler('denwis', getCurrentOrder('denwis'))}
-            >
-              DENWIS
-              {true ? (
-                <span className={classes.visuallyHidden}>
-                  {'sorted ascending'}
-                </span>
-              ) : null}
-            </StyledTableSortLabel>
-          </ColumnBadged>
-          <ColumnBadged center>
-            COVID
-            <SortPoper
-              size="small"
-              icon={
-                <CovidIcon
-                  value={{
-                    suspectedCovidStatus: COVID_FLAG,
-                    dateIsolationDueToEnd: null,
-                    covidTestRequest: null,
-                  }}
-                />
-              }
-            >
-              <Sort
-                onFilterSort={onRequestSort}
-                defaultValues={filters}
-                covid
-              />
+            Status
+            <SortPoper size="small" icon={<FilterListIcon htmlColor="#fff" />}>
+              <Box m={1} p={1}>
+                {/* <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={state.checkedA}
+                      onChange={handleChange}
+                      name="checkedA"
+                    />
+                  }
+                  label="Secondary"
+                /> */}
+              </Box>
             </SortPoper>
           </ColumnBadged>
-          <ColumnBadged center>
-            SEPSIS
-            <SortPoper
-              size="small"
-              icon={<SepsisIcon value={{ value: SEPSIS_FLAG }} />}
-            >
-              <Sort
-                onFilterSort={onRequestSort}
-                defaultValues={filters}
-                sepsis
-              />
-            </SortPoper>
-          </ColumnBadged>
-          <ColumnBadged center>
-            <StyledTableSortLabel
-              active={orderBy === 'news2'}
-              direction={getCurrentOrder('news2')}
-              onClick={createSortHandler('news2', getCurrentOrder('news2'))}
-            >
-              NEWS2
-              {true ? (
-                <span className={classes.visuallyHidden}>
-                  {'sorted ascending'}
-                </span>
-              ) : null}
-            </StyledTableSortLabel>
-          </ColumnBadged>
-          <ColumnBadged center>Action</ColumnBadged>
         </tr>
       </thead>
       <tbody>{children}</tbody>
     </TableElement>
   );
 };
-export { Table };
+export { Tasks };

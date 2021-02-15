@@ -15,7 +15,6 @@ import { assessmentReducer } from 'store/assessmentTypeReducer';
 import { authReducer, selectAuth, logOut } from 'store/authReducer';
 
 import { sessionReducer } from 'redux-react-session';
-// import { sessionSelector } from 'utils/selectors';
 import { useInjectReducer } from 'redux-injectors';
 
 import { AcuityDashboard } from './containers/AcuityDashboard';
@@ -28,6 +27,7 @@ import Login from './containers/Login';
 
 import { GlobalStyle } from 'styles/global-styles';
 import Layout from 'components/Layout';
+import { TasksList } from './containers/TasksList';
 
 export function App() {
   useInjectReducer({ key: 'session', reducer: sessionReducer });
@@ -70,8 +70,18 @@ export function App() {
           />
           <ProtectedRoute
             exact
+            header="Tasks List"
+            path={process.env.PUBLIC_URL + '/tasks'}
+            component={TasksList}
+            authenticated={authenticated}
+            username={auth}
+            bottomToolBar
+          />
+          <ProtectedRoute
+            exact
             path={process.env.PUBLIC_URL + '/covid-management/:id'}
             component={InfectionControl}
+            authenticated={authenticated}
             username={auth}
           />
           <ProtectedRoute

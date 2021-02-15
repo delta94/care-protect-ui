@@ -35,4 +35,5 @@ export const ColumnBadged = td`
   font-weight: bold;
   font-size: 12px;
   text-align: ${props => ((props as any)?.center ? 'center' : 'left')};
+  max-width: 110px;
 `;

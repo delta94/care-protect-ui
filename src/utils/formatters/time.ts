@@ -27,9 +27,12 @@ export const daysDifference = (start?: any, end?: any) => {
 export const formatTime = (value?: string) => {
   if (value) {
     const date = new Date(value);
-    const houre = date.getHours();
+    let houre = date.getHours();
     const minuts = date.getMinutes();
-    return `${houre}:${minuts}`;
+    const printHoure = houre < 10 ? `0${houre}` : `${houre}`;
+    const printMinutes = minuts < 10 ? `0${minuts}` : `${minuts}`;
+
+    return `${printHoure}:${printMinutes}`;
   }
   return null;
 };

@@ -176,7 +176,7 @@ const VitalSignsTable = ({ news2, flowRate }) => {
               value={news2?.spoScale_1?.value}
               units={'%'}
             />
-            <Cell ordinal={0} value={flowRate || '-'} units={'l/min'} border />
+            <Cell ordinal={0} value={flowRate || '-'} units={'1/min'} border />
             <Cell
               ordinal={news2?.systolicBloodPressure?.ordinal}
               value={`${news2?.systolicBloodPressure?.value}`}
