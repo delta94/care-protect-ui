@@ -9,8 +9,10 @@ import { InfectionControl } from 'app/containers/InfectionControl/types';
 
 import { AssessmentEvent } from 'app/containers/Assessment/types';
 import { PatientOverview } from 'app/containers/PatientOverview/types';
+import { ThemeState } from 'styles/theme/slice/types';
 
 export interface RootState {
+  theme?: ThemeState;
   session?: any;
   assessmentyType?: any;
   patientsList?: PatientsList;
